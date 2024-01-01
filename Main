@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Masukkan nama Anda : ");
+        String nama = scanner.nextLine();
+
+        System.out.print("Masukkan jenis kelamin (pria/wanita) : ");
+        String jenisKelamin = scanner.nextLine();
+
+        System.out.print("Masukkan berat badan (kg) : ");
+        double beratBadan = scanner.nextDouble();
+
+        System.out.print("Masukkan tinggi badan (cm) : ");
+        double tinggiBadan = scanner.nextDouble();
+
+        System.out.print("Masukkan usia Anda : ");
+        int usia = scanner.nextInt();
+
+        System.out.print("Masukkan level aktivitas fisik Anda (rendah/sedang/tinggi) : ");
+        String levelAktivitas = scanner.next();
+
+        KalkulatorKalori kalkulator = new KalkulatorKalori(nama, jenisKelamin, beratBadan, tinggiBadan, usia, levelAktivitas);
+        kalkulator.tampilkanInformasiKalori();
+
+        System.out.print("\nMasukkan jumlah kalori yang dikonsumsi : ");
+        double kaloriDikonsumsi = scanner.nextDouble();
+
+        System.out.print("Masukkan jumlah kalori yang terbakar dari aktivitas fisik : ");
+        double kaloriTerbakar = scanner.nextDouble();
+
+        kalkulator.hitungSisaKalori(kaloriDikonsumsi, kaloriTerbakar);
+
+        scanner.close();
+    }
+}
+
