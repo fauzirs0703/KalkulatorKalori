@@ -1,0 +1,66 @@
+public class KalkulatorKalori {
+    private String nama;
+    private String jenisKelamin;
+    private double beratBadan;
+    private double tinggiBadan;
+    private int usia;
+    private String levelAktivitas;
+
+    public KalkulatorKalori(String nama, String jenisKelamin, double beratBadan, double tinggiBadan, int usia, String levelAktivitas) {
+        this.nama = nama;
+        this.jenisKelamin = jenisKelamin;
+        this.beratBadan = beratBadan;
+        this.tinggiBadan = tinggiBadan;
+        this.usia = usia;
+        this.levelAktivitas = levelAktivitas;
+    }
+
+    public double hitungBMR() {
+        double bmr = 0;
+
+        if (jenisKelamin.equalsIgnoreCase("pria")) {
+            bmr = 88.362 + (13.397 * beratBadan) + (4.799 * tinggiBadan) - (5.677 * usia);
+        } else if (jenisKelamin.equalsIgnoreCase("wanita")) {
+            bmr = 447.593 + (9.247 * beratBadan) + (3.098 * tinggiBadan) - (4.330 * usia);
+        }
+
+        return bmr;
+    }
+
+    public double hitungKaloriHarian(double bmr) {
+        double kaloriHarian = 0;
+
+        if (levelAktivitas.equalsIgnoreCase("rendah")) {
+            kaloriHarian = bmr * 1.2;
+        } else if (levelAktivitas.equalsIgnoreCase("sedang")) {
+            kaloriHarian = bmr * 1.55;
+        } else if (levelAktivitas.equalsIgnoreCase("tinggi")) {
+            kaloriHarian = bmr * 1.9;
+        }
+
+        return kaloriHarian;
+    }
+
+    public void tampilkanInformasiKalori() {
+        double bmr = hitungBMR();
+        double kaloriHarian = hitungKaloriHarian(bmr);
+
+        System.out.println("\n--- Kebutuhan Kalori Harian ---");
+        System.out.println("Nama : " + nama);
+        System.out.println("BMR : " + bmr + " kalori/hari");
+        System.out.println("Kebutuhan Kalori Harian : " + kaloriHarian + " kalori/hari");
+    }
+
+    public void hitungSisaKalori(double kaloriDikonsumsi, double kaloriTerbakar) {
+        double bmr = hitungBMR();
+        double kaloriHarian = hitungKaloriHarian(bmr);
+
+        double sisaKalori = kaloriHarian - kaloriDikonsumsi + kaloriTerbakar;
+
+        if (sisaKalori < 0) {
+            System.out.println("\nPeringatan : Anda telah melebihi kebutuhan kalori harian Anda!");
+        } else {
+            System.out.println("\nSisa kalori harian Anda : " + sisaKalori + " kalori.");
+        }
+    }
+}
